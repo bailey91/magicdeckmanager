@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using MtgApiManager.Lib.Model;
+using MtgApiManager.Lib.Service;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MagicDeckManager.Controllers
 {
     [Route("api/[controller]")]
-    public class CardController1 : Controller
+    public class CardController : Controller
     {
+        public CardService cardService = new CardService();
+
+
         // GET: api/<controller>
         [HttpGet]
         public IEnumerable<string> Get()
@@ -20,9 +24,9 @@ namespace MagicDeckManager.Controllers
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Card Get(string id)
         {
-            return "value";
+            return cardService.Find(id).Value; 
         }
 
         // POST api/<controller>
